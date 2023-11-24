@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   // TODO: need import user: user employee and hr/admin
 
-  const employee = true;
+  const employee = false;
   const admin = false;
 
   const links = (
@@ -75,8 +75,8 @@ const Navbar = () => {
   );
 
   return (
-    <div>
-      <div className="navbar bg-base-100">
+    <div className="">
+      <div className="navbar text-white text-2xl font-bold fixed z-10  ">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
