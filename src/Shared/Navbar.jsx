@@ -1,22 +1,76 @@
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  // TODO: need import user: user employee and hr/admin
+
+  const employee = true;
+  const admin = false;
+
   const links = (
     <>
-      <li>
-        <NavLink to={"/"}>Home</NavLink>
-      </li>
+      {employee ? (
+        <>
+          <li>
+            <NavLink to={"/"}>Home</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/my-team"}>My Team</NavLink>
+          </li>
 
-      <li>
-        <NavLink to={"/join-as-emp"}>Join as Employee</NavLink>
-      </li>
+          <li>
+            <NavLink to={"/my-assets"}>My Assets</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/request-for-asset"}>Request For an Asset</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/make-a-custom-request"}>
+              Make a Custom Request
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/dashboard"}>Profile</NavLink>
+          </li>
+        </>
+      ) : admin ? (
+        <>
+          <li>
+            <NavLink to={"/"}>Home</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/employee-list"}>My Employee List</NavLink>
+          </li>
 
-      <li>
-        <NavLink to={"/join-as-admin"}>Join as HR/Admin</NavLink>
-      </li>
-      <li>
-        <NavLink to={"/login"}>Login</NavLink>
-      </li>
+          <li>
+            <NavLink to={"/add-an-employee"}>Add an Employee</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/assets"}>Asset List</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/all-request"}>All Request</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/custom-request"}>Custom Request List</NavLink>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to={"/"}>Home</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/join-as-emp"}>Join as Employee</NavLink>
+          </li>
+
+          <li>
+            <NavLink to={"/join-as-admin"}>Join as HR/Admin</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/login"}>Login</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -53,6 +107,8 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
+
+        {/* navbar end image and logout */}
         <div className="navbar-end">
           <a className="btn">Button</a>
         </div>
