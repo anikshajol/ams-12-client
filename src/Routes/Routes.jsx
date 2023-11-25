@@ -3,6 +3,7 @@ import Main from "../Layouts/Main";
 import EmployeeRegistration from "../Pages/AuthenticationPages/EmployeeRegistration/EmployeeRegistration";
 import AdminRegistration from "../Pages/AuthenticationPages/AdminRegistration/AdminRegistration";
 import Home from "../Pages/HomePage/Home/Home";
+import Login from "../Pages/AuthenticationPages/Login/Login";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "/join-as-admin",
         element: <AdminRegistration></AdminRegistration>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
       },
     ],
   },

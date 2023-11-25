@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-const EmployeeRegistration = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
@@ -13,28 +13,13 @@ const EmployeeRegistration = () => {
 
   return (
     <div>
-      <div className="hero min-h-screen bg-orange-500">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">Join now!</h1>
-            <p className="py-6">Join As an Employee</p>
-          </div>
-
+      <div className="hero min-h-screen ">
+        <div className="hero-content">
           <div className="card max-w-sm shadow-2xl bg-transparent">
+            <div className="text-center py-4">
+              <h1 className="text-5xl font-bold">Login now!</h1>
+            </div>
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-              {/* full name */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Full Name</span>
-                </label>
-                <input
-                  type="text"
-                  {...register("name", { required: true })}
-                  placeholder="Full Name"
-                  className="input input-bordered"
-                />
-              </div>
-
               {/* email */}
               <div className="form-control">
                 <label className="label">
@@ -67,22 +52,8 @@ const EmployeeRegistration = () => {
                 </label>
               </div>
 
-              {/* dob */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Date Of birth</span>
-                </label>
-                <input
-                  type="date"
-                  placeholder=""
-                  {...register("date", { required: true })}
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
+                <button className="btn btn-primary">Login</button>
               </div>
             </form>
           </div>
@@ -92,4 +63,4 @@ const EmployeeRegistration = () => {
   );
 };
 
-export default EmployeeRegistration;
+export default Login;
