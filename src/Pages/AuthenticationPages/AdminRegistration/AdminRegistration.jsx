@@ -4,6 +4,7 @@ import Select from "react-select";
 import useAuth from "../../../Hook/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const AdminRegistration = () => {
   const options = [
     { value: "5 Members For $5", label: "5 Members For $5" },
@@ -24,7 +25,7 @@ const AdminRegistration = () => {
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    // console.log(data);
+    console.log(data);
     console.log(email, password, "only email,password");
     const formData = { ...data, selectedPackage };
 
@@ -33,7 +34,18 @@ const AdminRegistration = () => {
     createUser(email, password)
       .then((res) => {
         const regUser = res.user;
-        console.log(regUser);
+        console.log(res.data);
+
+        updateUserProfile(data.name, data.companyLogo).then(() => {
+          console.log("name, and photo update");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your registration successfully complete",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -42,6 +54,9 @@ const AdminRegistration = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin Registration</title>
+      </Helmet>
       <div className="hero min-h-screen bg-orange-500">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center w-1/2 lg:text-left">
@@ -87,7 +102,7 @@ const AdminRegistration = () => {
                 <input
                   type="text"
                   {...register("companyLogo", { required: true })}
-                  placeholder="Company Logo"
+                  placeholder="Give url of Company Logo"
                   className="input input-bordered"
                 />
               </div>

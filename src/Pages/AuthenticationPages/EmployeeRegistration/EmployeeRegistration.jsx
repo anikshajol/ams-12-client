@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 
 const EmployeeRegistration = () => {
@@ -13,6 +14,9 @@ const EmployeeRegistration = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Employee Registration</title>
+      </Helmet>
       <div className="hero min-h-screen bg-orange-500">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center w-1/2 lg:text-left">
@@ -31,6 +35,20 @@ const EmployeeRegistration = () => {
                   type="text"
                   {...register("name", { required: true })}
                   placeholder="Full Name"
+                  className="input input-bordered"
+                />
+              </div>
+
+              {/* Company Logo */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text  text-xl">Company Logo</span>
+                </label>
+
+                <input
+                  type="text"
+                  {...register("companyLogo", { required: true })}
+                  placeholder="Company Logo"
                   className="input input-bordered"
                 />
               </div>

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
@@ -13,6 +14,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <div className="hero min-h-screen ">
         <div className="hero-content">
           <div className="card max-w-sm shadow-2xl bg-transparent">

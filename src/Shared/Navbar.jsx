@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import logo from "../assets/5f55175d9ecd1400ee2626df64545058.png";
 
 const Navbar = () => {
   // TODO: need import user: user employee and hr/admin
@@ -102,7 +103,12 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+
+          <div className="avatar">
+            <div className="w-12">
+              <img src={logo} className="rounded-full" />
+            </div>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
