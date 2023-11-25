@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
+import useAuth from "../../../Hook/useAuth";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const AdminRegistration = () => {
   const options = [
     { value: "5 Members For $5", label: "5 Members For $5" },
     { value: "10 Members for $8", label: "10 Members for $8" },
     { value: "20 Members for $15", label: "20 Members for $15" },
   ];
-
+  const { createUser, updateUserProfile } = useAuth();
   const [selectedPackage, setSelectedPackage] = useState(null);
+  const navigate = useNavigate();
 
   //   console.log(selectedPackage);
 
@@ -19,7 +23,21 @@ const AdminRegistration = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log({ ...data, selectedPackage });
+    const { email, password } = data;
+    // console.log(data);
+    console.log(email, password, "only email,password");
+    const formData = { ...data, selectedPackage };
+
+    // console.log(formData);
+
+    createUser(email, password)
+      .then((res) => {
+        const regUser = res.user;
+        console.log(regUser);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -28,15 +46,15 @@ const AdminRegistration = () => {
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center w-1/2 lg:text-left">
             <h1 className="text-5xl font-bold">Join now!</h1>
-            <p className="py-6">Join As a Admin</p>
+            <p className="py-6 text-3xl">Join As a Admin</p>
           </div>
 
-          <div className="card max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+          <div className="card max-w-sm shadow-2xl bg-transparent  ">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body ">
               {/* full name */}
-              <div className="form-control">
+              <div className="form-control ">
                 <label className="label">
-                  <span className="label-text">Full Name</span>
+                  <span className="label-text text-xl  ">Full Name</span>
                 </label>
                 <input
                   type="text"
@@ -49,7 +67,7 @@ const AdminRegistration = () => {
               {/* Company name */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Company Name</span>
+                  <span className="label-text text-xl  ">Company Name</span>
                 </label>
 
                 <input
@@ -63,7 +81,7 @@ const AdminRegistration = () => {
               {/* Company Logo */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Company Logo</span>
+                  <span className="label-text  text-xl">Company Logo</span>
                 </label>
 
                 <input
@@ -77,7 +95,7 @@ const AdminRegistration = () => {
               {/* email */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text text-xl  ">Email</span>
                 </label>
                 <input
                   type="email"
@@ -90,7 +108,7 @@ const AdminRegistration = () => {
               {/* password */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text text-xl  ">Password</span>
                 </label>
                 <input
                   type="password"
@@ -100,7 +118,10 @@ const AdminRegistration = () => {
                   required
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <a
+                    href="#"
+                    className="label-text text-xl  -alt link link-hover"
+                  >
                     Forgot password?
                   </a>
                 </label>
@@ -109,7 +130,7 @@ const AdminRegistration = () => {
               {/* dob */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Date Of Birth</span>
+                  <span className="label-text text-xl  ">Date Of Birth</span>
                 </label>
                 <input
                   type="date"
@@ -119,7 +140,10 @@ const AdminRegistration = () => {
                   required
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <a
+                    href="#"
+                    className="label-text text-xl  -alt link link-hover"
+                  >
                     Forgot password?
                   </a>
                 </label>
@@ -128,7 +152,7 @@ const AdminRegistration = () => {
               {/* Select Options */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Select Packages</span>
+                  <span className="label-text text-xl  ">Select Packages</span>
                 </label>
                 <Select
                   //   {...register("selectedPackage", { required: true })}

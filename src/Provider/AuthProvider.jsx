@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
 
@@ -21,12 +22,19 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  //
+  // update User profile
+
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("current suer", currentUser);
+      console.log("current user", currentUser);
     });
 
     setLoading(false);
@@ -36,6 +44,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     createUser,
+    updateUserProfile,
     loading,
     user,
   };
