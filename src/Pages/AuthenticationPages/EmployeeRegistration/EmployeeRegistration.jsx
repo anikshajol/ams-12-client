@@ -20,7 +20,7 @@ const EmployeeRegistration = () => {
             <p className="py-6">Join As an Employee</p>
           </div>
 
-          <div className="card max-w-sm shadow-2xl bg-base-100">
+          <div className="card max-w-sm shadow-2xl bg-transparent">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               {/* full name */}
               <div className="form-control">
