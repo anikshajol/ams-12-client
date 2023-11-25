@@ -1,7 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/5f55175d9ecd1400ee2626df64545058.png";
+import useAuth from "../Hook/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   // TODO: need import user: user employee and hr/admin
 
   const employee = false;
@@ -67,9 +80,6 @@ const Navbar = () => {
           <li>
             <NavLink to={"/join-as-admin"}>Join as HR/Admin</NavLink>
           </li>
-          <li>
-            <NavLink to={"/login"}>Login</NavLink>
-          </li>
         </>
       )}
     </>
@@ -116,7 +126,15 @@ const Navbar = () => {
 
         {/* navbar end image and logout */}
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {!user ? (
+            <NavLink to={"/login"}>
+              <button className="btn">Login</button>
+            </NavLink>
+          ) : (
+            <button onClick={handleLogOut} className="btn">
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </div>

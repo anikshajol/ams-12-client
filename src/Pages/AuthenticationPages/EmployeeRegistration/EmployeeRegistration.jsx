@@ -1,7 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import useAuth from "../../../Hook/useAuth";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const EmployeeRegistration = () => {
+  const { createUser, loading, updateUserProfile } = useAuth();
+  // console.log(loading);
   const {
     register,
     handleSubmit,
@@ -10,6 +15,24 @@ const EmployeeRegistration = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    const { email, password } = data;
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.data);
+        updateUserProfile(data.name, data.companyLogo).then(() => {
+          console.log("name and photo updated");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your registration successfully completed as a Employee",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
@@ -18,13 +41,15 @@ const EmployeeRegistration = () => {
         <title>Employee Registration</title>
       </Helmet>
       <div className="hero min-h-screen bg-orange-500">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center w-1/2 lg:text-left">
+        <div className="hero-content  flex-col lg:flex-row-reverse ">
+          <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Join now!</h1>
-            <p className="py-6">Join As an Employee</p>
+            <p className="py-6 text-xl text-white font-bold ">
+              Join As an Employee
+            </p>
           </div>
 
-          <div className="card max-w-sm shadow-2xl bg-transparent">
+          <div className="card  shadow-2xl bg-transparent">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               {/* full name */}
               <div className="form-control">
@@ -48,7 +73,7 @@ const EmployeeRegistration = () => {
                 <input
                   type="text"
                   {...register("companyLogo", { required: true })}
-                  placeholder="Company Logo"
+                  placeholder="Give url of Company Logo"
                   className="input input-bordered"
                 />
               </div>
@@ -100,7 +125,20 @@ const EmployeeRegistration = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
+                <button type="submit" className="btn btn-primary text-white">
+                  Register
+                </button>
+              </div>
+              <div>
+                <p className="text-lg text-white font-medium">
+                  All ready Registered? Please{" "}
+                  <Link
+                    to={"/login"}
+                    className="text-blue-700 text-lg font-bold "
+                  >
+                    Login
+                  </Link>
+                </p>
               </div>
             </form>
           </div>

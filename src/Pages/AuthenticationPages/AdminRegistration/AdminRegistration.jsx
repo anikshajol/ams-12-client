@@ -5,6 +5,7 @@ import useAuth from "../../../Hook/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import GoogleLogin from "../SocialLogin/GoogleLogin";
 const AdminRegistration = () => {
   const options = [
     { value: "5 Members For $5", label: "5 Members For $5" },
@@ -41,7 +42,7 @@ const AdminRegistration = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Your registration successfully complete",
+            title: "Your registration successfully completed as an Admin",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -57,14 +58,14 @@ const AdminRegistration = () => {
       <Helmet>
         <title>Admin Registration</title>
       </Helmet>
-      <div className="hero min-h-screen bg-orange-500">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center w-1/2 lg:text-left">
+      <div className="min-h-screen bg-orange-500">
+        <div className="flex gap-10 items-center justify-center flex-col lg:flex-row-reverse">
+          <div className="text-center ">
             <h1 className="text-5xl font-bold">Join now!</h1>
             <p className="py-6 text-3xl">Join As a Admin</p>
           </div>
 
-          <div className="card max-w-sm shadow-2xl bg-transparent  ">
+          <div className="card w-96 shadow-2xl bg-transparent  ">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body ">
               {/* full name */}
               <div className="form-control ">
@@ -185,6 +186,9 @@ const AdminRegistration = () => {
                 </button>
               </div>
             </form>
+            <div className=" flex justify-center">
+              <GoogleLogin></GoogleLogin>
+            </div>
           </div>
         </div>
       </div>
