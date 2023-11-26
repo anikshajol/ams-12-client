@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "assetName": "Laptop",
+    "price": 1200,
+    "type": "Electronics",
+    "image": "https://i.ibb.co/TwfFb8S/laptop.jpg",
+    "availability": true,
+    "additionalInformation": "Intel Core i7, 16GB RAM, 512GB SSD",
+    "requestDate": "25/11/2023, 10:30 AM",
+    "status": "Approved",
+    "returnType": "Returnable"
+  },
+  {
+    "id": 2,
+    "assetName": "Conference Room Projector",
+    "price": 500,
+    "type": "Office Equipment",
+    "image": "https://i.ibb.co/jLgyxG4/projector.jpg",
+    "availability": false,
+    "additionalInformation": "HD resolution, HDMI input",
+    "requestDate": "24/11/2023, 3:45 PM",
+    "status": "Pending",
+    "returnType": "Non-returnable"
+  },
+  {
+    "id": 3,
+    "assetName": "Company Car",
+    "price": 30000,
+    "type": "Vehicle",
+    "image": "https://i.ibb.co/d6sCdyd/car.jpg",
+    "availability": true,
+    "additionalInformation": "Model: XYZ, Mileage: 20,000 miles",
+    "requestDate": "23/11/2023, 9:00 AM",
+    "status": "Declined",
+    "returnType": "Returnable"
+  },
+  {
+    "id": 4,
+    "assetName": "Office Desk",
+    "price": 150,
+    "type": "Furniture",
+    "image": "https://i.ibb.co/R9yRSWM/officedesk.jpg",
+    "availability": true,
+    "additionalInformation": "Wooden desk with drawers",
+    "requestDate": "22/11/2023, 12:15 PM",
+    "status": "Approved",
+    "returnType": "Non-returnable"
+  },
+  {
+    "id": 5,
+    "assetName": "Desktop Computer",
+    "price": 2000,
+    "type": "Electronics",
+    "image": "https://i.ibb.co/28hNMFD/desktop-computer.jpg",
+    "availability": false,
+    "additionalInformation": "Gaming PC with NVIDIA GPU",
+    "requestDate": "21/11/2023, 2:20 PM",
+    "status": "Pending",
+    "returnType": "Returnable"
+  }
+]

@@ -67,13 +67,13 @@ const EmployeeRegistration = () => {
               {/* Company Logo */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text  text-xl">Company Logo</span>
+                  <span className="label-text  text-xl">Photo URL</span>
                 </label>
 
                 <input
                   type="text"
-                  {...register("companyLogo", { required: true })}
-                  placeholder="Give url of Company Logo"
+                  {...register("photo", { required: true })}
+                  placeholder="Give your Photo url "
                   className="input input-bordered"
                 />
               </div>

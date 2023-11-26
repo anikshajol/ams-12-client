@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/5f55175d9ecd1400ee2626df64545058.png";
 import useAuth from "../Hook/useAuth";
+import moment from "moment";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -22,18 +23,18 @@ const Navbar = () => {
 
   const links = (
     <>
-      {employee ? (
+      {user ? (
         <>
           <li>
             <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
+            <NavLink to={"/my-assets"}>My Assets</NavLink>
+          </li>
+          <li>
             <NavLink to={"/my-team"}>My Team</NavLink>
           </li>
 
-          <li>
-            <NavLink to={"/my-assets"}>My Assets</NavLink>
-          </li>
           <li>
             <NavLink to={"/request-for-asset"}>Request For an Asset</NavLink>
           </li>
@@ -131,9 +132,16 @@ const Navbar = () => {
               <button className="btn">Login</button>
             </NavLink>
           ) : (
-            <button onClick={handleLogOut} className="btn">
-              Logout
-            </button>
+            <>
+              <div className="mr-2">{user?.displayName}</div>
+              <div className="w-12 mr-5">
+                <img src={user?.photoURL} />
+              </div>
+
+              <button onClick={handleLogOut} className="btn">
+                Logout
+              </button>
+            </>
           )}
         </div>
       </div>
