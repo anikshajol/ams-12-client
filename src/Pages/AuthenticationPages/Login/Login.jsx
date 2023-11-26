@@ -1,15 +1,43 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import useAuth from "../../../Hook/useAuth";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { loginUser, user } = useAuth();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  // console.log(errors);
+
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+    const { email, password } = data;
+    setError("");
+    loginUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your registration successfully completed as a Employee",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err.message);
+      });
   };
 
   return (
@@ -19,7 +47,7 @@ const Login = () => {
       </Helmet>
       <div className="hero min-h-screen ">
         <div className="hero-content">
-          <div className="card max-w-sm shadow-2xl bg-transparent">
+          <div className="card max-w-md shadow-2xl bg-transparent">
             <div className="text-center py-4">
               <h1 className="text-5xl font-bold">Login now!</h1>
             </div>
@@ -57,7 +85,16 @@ const Login = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                {user ? (
+                  <button disabled className="btn btn-primary">
+                    Login
+                  </button>
+                ) : (
+                  <button className="btn btn-primary">Login</button>
+                )}
+              </div>
+              <div>
+                <p className="text-lg text-red-600">{error}</p>
               </div>
             </form>
           </div>
