@@ -4,6 +4,7 @@ import EmployeeRegistration from "../Pages/AuthenticationPages/EmployeeRegistrat
 import AdminRegistration from "../Pages/AuthenticationPages/AdminRegistration/AdminRegistration";
 import Home from "../Pages/HomePage/Home/Home";
 import Login from "../Pages/AuthenticationPages/Login/Login";
+import MyAssets from "../Pages/Employee/Assets/MyAssets";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/my-assets",
+        element: <MyAssets></MyAssets>,
       },
     ],
   },

@@ -5,11 +5,11 @@
     "price": 1200,
     "type": "Electronics",
     "image": "https://i.ibb.co/TwfFb8S/laptop.jpg",
-    "availability": true,
     "additionalInformation": "Intel Core i7, 16GB RAM, 512GB SSD",
     "requestDate": "25/11/2023, 10:30 AM",
     "status": "Approved",
-    "returnType": "Returnable"
+    "returnType": "Returnable",
+    "whyNeed": "Increased productivity for remote work."
   },
   {
     "id": 2,
@@ -17,11 +17,11 @@
     "price": 500,
     "type": "Office Equipment",
     "image": "https://i.ibb.co/jLgyxG4/projector.jpg",
-    "availability": false,
     "additionalInformation": "HD resolution, HDMI input",
     "requestDate": "24/11/2023, 3:45 PM",
     "status": "Pending",
-    "returnType": "Non-returnable"
+    "returnType": "Non-returnable",
+    "whyNeed": "Enhance presentations during meetings."
   },
   {
     "id": 3,
@@ -29,11 +29,11 @@
     "price": 30000,
     "type": "Vehicle",
     "image": "https://i.ibb.co/d6sCdyd/car.jpg",
-    "availability": true,
     "additionalInformation": "Model: XYZ, Mileage: 20,000 miles",
     "requestDate": "23/11/2023, 9:00 AM",
     "status": "Declined",
-    "returnType": "Returnable"
+    "returnType": "Returnable",
+    "whyNeed": "Business trips and client meetings."
   },
   {
     "id": 4,
@@ -41,11 +41,11 @@
     "price": 150,
     "type": "Furniture",
     "image": "https://i.ibb.co/R9yRSWM/officedesk.jpg",
-    "availability": true,
     "additionalInformation": "Wooden desk with drawers",
     "requestDate": "22/11/2023, 12:15 PM",
     "status": "Approved",
-    "returnType": "Non-returnable"
+    "returnType": "Non-returnable",
+    "whyNeed": "Create a comfortable workspace for employees."
   },
   {
     "id": 5,
@@ -53,10 +53,10 @@
     "price": 2000,
     "type": "Electronics",
     "image": "https://i.ibb.co/28hNMFD/desktop-computer.jpg",
-    "availability": false,
     "additionalInformation": "Gaming PC with NVIDIA GPU",
     "requestDate": "21/11/2023, 2:20 PM",
     "status": "Pending",
-    "returnType": "Returnable"
+    "returnType": "Returnable",
+    "whyNeed": "Development of resource-intensive applications."
   }
 ]

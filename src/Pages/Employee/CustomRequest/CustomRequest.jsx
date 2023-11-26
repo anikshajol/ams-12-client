@@ -1,7 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { useEffect, useState } from "react";
-import Modal from "./Modal";
 
 const CustomRequest = () => {
   //   const axiosSecure = useAxiosSecure();
@@ -15,8 +12,10 @@ const CustomRequest = () => {
   //     },
   //   });
 
+  //   TODO: need fetch from server
+
   useEffect(() => {
-    fetch("data.json")
+    fetch("requestAssets.json")
       .then((res) => res.json())
       .then((data) => setRequestAsset(data));
   }, []);
@@ -39,7 +38,7 @@ const CustomRequest = () => {
           <tbody className="text-lg ">
             {/* row 1 */}
             {requestAsset.map((asset, index) => (
-              <tr key={asset.id}>
+              <tr key={asset.index}>
                 <th>{index + 1}</th>
                 <td> {asset.assetName} </td>
                 <td>${asset.price}</td>
@@ -102,8 +101,8 @@ const CustomRequest = () => {
                               <span className=" font-bold">Posting Time: </span>
                               {asset.requestDate}
                             </p>
+                            <p>{asset.whyNeed}</p>
                           </div>
-                          <p>{asset.needs ? asset.needs : ""}</p>
 
                           <div className="card-actions justify-between items-center">
                             <p
