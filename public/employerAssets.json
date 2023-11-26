@@ -3,35 +3,35 @@
     "assetName": "Laptop",
     "returnType": "Returnable",
     "requestDate": "25/11/2023, 10:30 AM",
-    "approvalDate": "n/a",
+    "approvalDate": "26/11/2023, 12:30 PM",
     "status": "Approved"
   },
   {
     "assetName": "Conference Room Projector",
     "returnType": "Non-returnable",
     "requestDate": "24/11/2023, 3:45 PM",
-    "approvalDate": "pending",
+    "approvalDate": "",
     "status": "Pending"
   },
   {
     "assetName": "Company Car",
     "returnType": "Returnable",
     "requestDate": "23/11/2023, 9:00 AM",
-    "approvalDate": "n/a",
+    "approvalDate": "",
     "status": "Declined"
   },
   {
     "assetName": "Office Desk",
     "returnType": "Non-returnable",
     "requestDate": "22/11/2023, 12:15 PM",
-    "approvalDate": "n/a",
+    "approvalDate": "25/11/2023, 11:15 AM",
     "status": "Approved"
   },
   {
     "assetName": "Desktop Computer",
     "returnType": "Returnable",
     "requestDate": "21/11/2023, 2:20 PM",
-    "approvalDate": "pending",
+    "approvalDate": "",
     "status": "Pending"
   }
 ]

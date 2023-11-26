@@ -1,0 +1,77 @@
+[
+  {
+    "assetName": "Laptop",
+    "returnType": "Returnable",
+    "availability": true
+  },
+  {
+    "assetName": "Printer",
+    "returnType": "Non-returnable",
+    "availability": false
+  },
+  {
+    "assetName": "Conference Room Projector",
+    "returnType": "Returnable",
+    "availability": true
+  },
+  {
+    "assetName": "Desk Chair",
+    "returnType": "Non-returnable",
+    "availability": true
+  },
+  {
+    "assetName": "Desktop Computer",
+    "returnType": "Returnable",
+    "availability": false
+  },
+  {
+    "assetName": "Whiteboard",
+    "returnType": "Non-returnable",
+    "availability": true
+  },
+  {
+    "assetName": "Projector Screen",
+    "returnType": "Returnable",
+    "availability": false
+  },
+  {
+    "assetName": "Office Desk",
+    "returnType": "Returnable",
+    "availability": true
+  },
+  {
+    "assetName": "Wireless Mouse",
+    "returnType": "Non-returnable",
+    "availability": true
+  },
+  {
+    "assetName": "Office Phone",
+    "returnType": "Returnable",
+    "availability": false
+  },
+  {
+    "assetName": "Coffee Maker",
+    "returnType": "Non-returnable",
+    "availability": true
+  },
+  {
+    "assetName": "Filing Cabinet",
+    "returnType": "Returnable",
+    "availability": true
+  },
+  {
+    "assetName": "Smart TV",
+    "returnType": "Non-returnable",
+    "availability": false
+  },
+  {
+    "assetName": "Air Purifier",
+    "returnType": "Returnable",
+    "availability": true
+  },
+  {
+    "assetName": "External Hard Drive",
+    "returnType": "Non-returnable",
+    "availability": true
+  }
+]

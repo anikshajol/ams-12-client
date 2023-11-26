@@ -5,6 +5,7 @@ import AdminRegistration from "../Pages/AuthenticationPages/AdminRegistration/Ad
 import Home from "../Pages/HomePage/Home/Home";
 import Login from "../Pages/AuthenticationPages/Login/Login";
 import MyAssets from "../Pages/Employee/Assets/MyAssets";
+import RequestAssets from "../Pages/Employee/RequestAssets/RequestAssets";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/my-assets",
         element: <MyAssets></MyAssets>,
+      },
+      {
+        path: "/request-for-asset",
+        element: <RequestAssets></RequestAssets>,
       },
     ],
   },
