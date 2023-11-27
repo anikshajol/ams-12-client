@@ -6,6 +6,8 @@ import Home from "../Pages/HomePage/Home/Home";
 import Login from "../Pages/AuthenticationPages/Login/Login";
 import MyAssets from "../Pages/Employee/Assets/MyAssets";
 import RequestAssets from "../Pages/Employee/RequestAssets/RequestAssets";
+import PrivateRoute from "./PrivateRoute";
+// import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +36,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/request-for-asset",
-        element: <RequestAssets></RequestAssets>,
+        element: (
+          <PrivateRoute>
+            <RequestAssets></RequestAssets>
+          </PrivateRoute>
+        ),
       },
     ],
   },

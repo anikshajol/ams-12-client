@@ -1,12 +1,26 @@
+import { Helmet } from "react-helmet-async";
 import useAssets from "../../../Hook/useAssets";
+import useAuth from "../../../Hook/useAuth";
 
 const RequestAssets = () => {
   const [assets, isPending] = useAssets();
+  const { loading } = useAuth();
   console.log(assets);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <span className="loading  loading-spinner w-44 text-info"></span>
+      </div>
+    );
+  }
 
   return (
     <div>
-      {isPending ? (
+      <Helmet>
+        <title>Admin Registration</title>
+      </Helmet>
+      {loading ? (
         <div className="flex justify-center">
           <span className="loading  loading-spinner w-44 text-info"></span>
         </div>

@@ -10,8 +10,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-
-  const from = location?.state?.from?.pathname || "/";
+  console.log(location);
 
   const {
     register,
@@ -36,7 +35,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(from, { replace: true });
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
         console.log(err);
