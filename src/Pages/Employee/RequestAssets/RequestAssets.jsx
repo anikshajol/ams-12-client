@@ -14,6 +14,8 @@ const RequestAssets = () => {
     setSelectType(e.target.value);
   };
 
+  // Todo: need modal for request button
+
   useEffect(() => {
     refetch();
   }, [search, refetch]);
@@ -87,7 +89,13 @@ const RequestAssets = () => {
                     {asset.availability ? "Available" : "Out of Stock"}
                   </td>
                   <td>
-                    <button className="btn btn-primary">Request</button>
+                    {asset.availability ? (
+                      <button className="btn btn-primary">Request</button>
+                    ) : (
+                      <button disabled className="btn btn-primary">
+                        Request
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

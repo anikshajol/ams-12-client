@@ -1,23 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import useCustomRequest from "../../../Hook/useCustomRequest";
 
 const CustomRequest = () => {
-  //   const axiosSecure = useAxiosSecure();
-  const [requestAsset, setRequestAsset] = useState([]);
-
-  //   const { data } = useQuery({
-  //     queryKey: ["customRequest"],
-  //     queryFn: async () => {
-  //       const res = fetch("data.json");
-  //       return res.data;
-  //     },
-  //   });
-
-  //   TODO: need fetch from server
+  const [requestAssets, isPending, refetch] = useCustomRequest();
 
   useEffect(() => {
-    fetch("requestAssets.json")
-      .then((res) => res.json())
-      .then((data) => setRequestAsset(data));
+    refetch();
   }, []);
 
   return (
@@ -35,14 +23,14 @@ const CustomRequest = () => {
               <th>View Details</th>
             </tr>
           </thead>
-          <tbody className="text-lg ">
+          <tbody className="text-lg uppercase ">
             {/* row 1 */}
-            {requestAsset.map((asset, index) => (
+            {requestAssets.map((asset, index) => (
               <tr key={asset.id}>
                 <th>{index + 1}</th>
                 <td> {asset.assetName} </td>
                 <td>${asset.price}</td>
-                <td>{asset.returnType}</td>
+                <td>{asset.returnType || asset.type}</td>
                 <td
                   style={{
                     color: asset.status === "Approved" ? "green" : "red",
@@ -84,7 +72,7 @@ const CustomRequest = () => {
                           <div className="flex items-center gap-4 justify-center flex-wrap text-lg">
                             <p className="">
                               <span className=" font-bold">Type: </span>
-                              {asset.returnType}
+                              {asset.returnType || asset.type}
                             </p>
                             <p className="text-orange-600 font-semibold text-lg">
                               {" "}

@@ -7,6 +7,7 @@ import Login from "../Pages/AuthenticationPages/Login/Login";
 import MyAssets from "../Pages/Employee/Assets/MyAssets";
 import RequestAssets from "../Pages/Employee/RequestAssets/RequestAssets";
 import PrivateRoute from "./PrivateRoute";
+import MakeCustomReq from "../Pages/Employee/MakeCustomReq/MakeCustomReq";
 // import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
             <RequestAssets></RequestAssets>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/make-a-custom-request",
+        element: <MakeCustomReq></MakeCustomReq>,
       },
     ],
   },
