@@ -21,8 +21,8 @@ const CustomRequest = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="overflow-x-auto">
+    <div className="">
+      <div className="overflow-x-auto  max-w-6xl mx-auto">
         <table className="table table-md table-pin-rows table-pin-cols">
           {/* head */}
           <thead className="text-xl font-bold">

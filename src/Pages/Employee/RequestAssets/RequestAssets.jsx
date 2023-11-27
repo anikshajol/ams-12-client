@@ -1,11 +1,22 @@
 import { Helmet } from "react-helmet-async";
 import useAssets from "../../../Hook/useAssets";
 import useAuth from "../../../Hook/useAuth";
+import { useEffect, useState } from "react";
 
 const RequestAssets = () => {
-  const [assets, isPending] = useAssets();
+  const [search, setSearch] = useState("");
+  const [assets, isPending, refetch] = useAssets(search);
   const { loading } = useAuth();
   console.log(assets);
+  const [selectType, setSelectType] = useState(null);
+
+  const handleFilterChange = (e) => {
+    setSelectType(e.target.value);
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [search, refetch]);
 
   if (loading) {
     return (
@@ -20,7 +31,30 @@ const RequestAssets = () => {
       <Helmet>
         <title>Admin Registration</title>
       </Helmet>
-      {loading ? (
+      <div className="py-8 flex gap-3 justify-center">
+        <div className="flex">
+          <input
+            type="text"
+            placeholder="Search here"
+            name="search"
+            onChange={(e) => setSearch(e.target.value)}
+            className="input relative  input-warning w-full max-w-xs"
+            value={search}
+          />
+        </div>
+
+        <select
+          className="select select-bordered  max-w-xs"
+          value={selectType}
+          onChange={handleFilterChange}
+        >
+          <option value="all">All</option>
+          <option value="approved">Approved</option>
+          <option value="returnable">Returnable</option>
+          <option value="non-returnable">Non-Returnable</option>
+        </select>
+      </div>
+      {isPending ? (
         <div className="flex justify-center">
           <span className="loading  loading-spinner w-44 text-info"></span>
         </div>

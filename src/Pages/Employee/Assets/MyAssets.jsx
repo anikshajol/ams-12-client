@@ -6,6 +6,7 @@ const MyAssets = () => {
   // const [empAssets, setEmpAssets] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
   const [search, setSearch] = useState("");
+  const [selectType, setSelectType] = useState(null);
 
   //   Todo: print button implement pdf react
 
@@ -16,13 +17,17 @@ const MyAssets = () => {
     setIsClicked(true);
   };
 
+  const handleFilterChange = (e) => {
+    setSelectType(e.target.value);
+  };
+
   useEffect(() => {
     refetch();
   }, [search, refetch]);
 
   return (
     <div>
-      <div className="py-8 flex justify-center">
+      <div className="py-8 flex gap-3 justify-center">
         <div className="flex">
           <input
             type="text"
@@ -39,6 +44,17 @@ const MyAssets = () => {
             value="Search"
           /> */}
         </div>
+
+        <select
+          className="select select-bordered  max-w-xs"
+          value={selectType}
+          onChange={handleFilterChange}
+        >
+          <option value="all">All</option>
+          <option value="approved">Approved</option>
+          <option value="returnable">Returnable</option>
+          <option value="non-returnable">Non-Returnable</option>
+        </select>
       </div>
       <div className="overflow-x-auto max-w-6xl mx-auto">
         <table className="table table-md">
@@ -55,127 +71,65 @@ const MyAssets = () => {
             </tr>
           </thead>
           {isPending ? (
-            <div className="items-center text-center">
-              <span className="loading  loading-spinner w-20 text-info"></span>
+            <div className="flex justify-center items-center text-center">
+              <span className="loading  loading-spinner w-20  text-info"></span>
             </div>
           ) : (
             <tbody className="text-lg font-medium">
               {/* row 1 */}
-              {search
-                ? empAssets.map((empAsset, index) => (
-                    <tr key={index}>
-                      <th>{index + 1}</th>
-                      <td>{empAsset.assetName}</td>
-                      <td>{empAsset.returnType}</td>
-                      <td>
-                        {moment(
-                          empAsset.requestDate,
+              {empAssets.map((empAsset, index) => (
+                <tr key={index}>
+                  <th>{index + 1}</th>
+                  <td>{empAsset.assetName}</td>
+                  <td>{empAsset.returnType}</td>
+                  <td>
+                    {moment(empAsset.requestDate, "DD/MM/YYYY, h:mm A").format(
+                      "MMMM Do YYYY"
+                    )}
+                  </td>
+                  <td>
+                    {empAsset.approvalDate
+                      ? moment(
+                          empAsset.approvalDate,
                           "DD/MM/YYYY, h:mm A"
-                        ).format("MMMM Do YYYY")}
-                      </td>
-                      <td>
-                        {empAsset.approvalDate
-                          ? moment(
-                              empAsset.approvalDate,
-                              "DD/MM/YYYY, h:mm A"
-                            ).format("MMMM Do YYYY")
-                          : ""}
-                      </td>
-                      <td
-                        className="font-bold"
-                        style={{
-                          color:
-                            empAsset.status === "Approved"
-                              ? "green"
-                              : empAsset.status === "Pending"
-                              ? "yellow"
-                              : "red",
-                        }}
+                        ).format("MMMM Do YYYY")
+                      : ""}
+                  </td>
+                  <td
+                    className="font-bold"
+                    style={{
+                      color:
+                        empAsset.status === "Approved"
+                          ? "green"
+                          : empAsset.status === "Pending"
+                          ? "yellow"
+                          : "red",
+                    }}
+                  >
+                    {empAsset.status}
+                  </td>
+                  <td>
+                    {empAsset.status === "Pending" ? (
+                      <button className="btn btn-error">Cancel</button>
+                    ) : empAsset.status === "Approved" &&
+                      empAsset.returnType === "Returnable" ? (
+                      <button
+                        onClick={handleClickToReturn}
+                        disabled={isClicked}
+                        className="btn btn-secondary"
                       >
-                        {empAsset.status}
-                      </td>
-                      <td>
-                        {empAsset.status === "Pending" ? (
-                          <button className="btn btn-error">Cancel</button>
-                        ) : empAsset.status === "Approved" &&
-                          empAsset.returnType === "Returnable" ? (
-                          <button
-                            onClick={handleClickToReturn}
-                            disabled={isClicked}
-                            className="btn btn-secondary"
-                          >
-                            {!isClicked ? "Return Back" : "Returned"}
-                          </button>
-                        ) : empAsset.status === "Approved" ? (
-                          <button className="btn btn-success">Print</button>
-                        ) : empAsset.status === "Approved" ? (
-                          <button className="btn btn-success">Print</button>
-                        ) : (
-                          <button className="btn btn-secondary">
-                            {" "}
-                            Re-Request
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))
-                : empAssets.map((empAsset, index) => (
-                    <tr key={index}>
-                      <th>{index + 1}</th>
-                      <td>{empAsset.assetName}</td>
-                      <td>{empAsset.returnType}</td>
-                      <td>
-                        {moment(
-                          empAsset.requestDate,
-                          "DD/MM/YYYY, h:mm A"
-                        ).format("MMMM Do YYYY")}
-                      </td>
-                      <td>
-                        {empAsset.approvalDate
-                          ? moment(
-                              empAsset.approvalDate,
-                              "DD/MM/YYYY, h:mm A"
-                            ).format("MMMM Do YYYY")
-                          : ""}
-                      </td>
-                      <td
-                        className="font-bold"
-                        style={{
-                          color:
-                            empAsset.status === "Approved"
-                              ? "green"
-                              : empAsset.status === "Pending"
-                              ? "yellow"
-                              : "red",
-                        }}
-                      >
-                        {empAsset.status}
-                      </td>
-                      <td>
-                        {empAsset.status === "Pending" ? (
-                          <button className="btn btn-error">Cancel</button>
-                        ) : empAsset.status === "Approved" &&
-                          empAsset.returnType === "Returnable" ? (
-                          <button
-                            onClick={handleClickToReturn}
-                            disabled={isClicked}
-                            className="btn btn-secondary"
-                          >
-                            {!isClicked ? "Return Back" : "Returned"}
-                          </button>
-                        ) : empAsset.status === "Approved" ? (
-                          <button className="btn btn-success">Print</button>
-                        ) : empAsset.status === "Approved" ? (
-                          <button className="btn btn-success">Print</button>
-                        ) : (
-                          <button className="btn btn-secondary">
-                            {" "}
-                            Re-Request
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                        {!isClicked ? "Return Back" : "Returned"}
+                      </button>
+                    ) : empAsset.status === "Approved" ? (
+                      <button className="btn btn-success">Print</button>
+                    ) : empAsset.status === "Approved" ? (
+                      <button className="btn btn-success">Print</button>
+                    ) : (
+                      <button className="btn btn-secondary"> Re-Request</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           )}
         </table>
