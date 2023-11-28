@@ -14,7 +14,7 @@ const useEmpAssets = (search) => {
     queryKey: ["empAssets", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/my-assets? email=${user.email}&search=${search}
+        `/my-assets?email=${user.email}&search=${search}
        `
       );
       return res.data;

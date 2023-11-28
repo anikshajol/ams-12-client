@@ -12,10 +12,13 @@ const useCustomRequest = () => {
     isPending,
     refetch,
   } = useQuery({
-    queryKey: ["customRequestAssets", user?.email],
+    queryKey: ["requestAssets", user?.email],
     queryFn: async () => {
-      const response = await axiosSecure.get(`/custom-request`);
+      const response = await axiosSecure.get(
+        `/custom-request?email=${user.email}`
+      );
       console.log(response.data);
+      console.log(response);
       return response.data;
     },
   });

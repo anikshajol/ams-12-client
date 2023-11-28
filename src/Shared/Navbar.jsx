@@ -1,11 +1,17 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/5f55175d9ecd1400ee2626df64545058.png";
 import useAuth from "../Hook/useAuth";
-import moment from "moment";
+import useAdmin from "../Hook/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  console.log(user);
+  // const axiosPublic = useAxiosPublic();
+  const [isAdmin] = useAdmin();
+
+  // const employee = data.filter((user) => user.role === "employee");
+
+  // console.log(data);
+
   const navigate = useNavigate();
   const handleLogOut = () => {
     logOut()
@@ -19,12 +25,9 @@ const Navbar = () => {
 
   // TODO: need import user: user employee and hr/admin
 
-  const employee = false;
-  const admin = false;
-
   const links = (
     <>
-      {user ? (
+      {isAdmin === false ? (
         <>
           <li>
             <NavLink to={"/"}>Home</NavLink>
@@ -48,26 +51,32 @@ const Navbar = () => {
             <NavLink to={"/dashboard"}>Profile</NavLink>
           </li>
         </>
-      ) : admin ? (
+      ) : isAdmin ? (
         <>
           <li>
             <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
-            <NavLink to={"/employee-list"}>My Employee List</NavLink>
+            <NavLink to={"/assetList"}>Asset List</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/addAsset"}>Add an Asset</NavLink>
           </li>
 
           <li>
-            <NavLink to={"/add-an-employee"}>Add an Employee</NavLink>
+            <NavLink to={"/allRequest"}>All Request</NavLink>
           </li>
           <li>
-            <NavLink to={"/assets"}>Asset List</NavLink>
+            <NavLink to={"/customRequest"}>Custom Request List</NavLink>
           </li>
           <li>
-            <NavLink to={"/all-request"}>All Request</NavLink>
+            <NavLink to={"/myEmployee"}>My Employee List</NavLink>
           </li>
           <li>
-            <NavLink to={"/custom-request"}>Custom Request List</NavLink>
+            <NavLink to={"/addEmployee"}>Add an Employee</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/adminProfile"}>Profile</NavLink>
           </li>
         </>
       ) : (

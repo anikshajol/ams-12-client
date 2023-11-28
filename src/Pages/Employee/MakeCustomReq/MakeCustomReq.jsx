@@ -32,9 +32,10 @@ const MakeCustomReq = () => {
       },
     });
 
-    if (response.data.success && user && user.email) {
+    if (response.data.success || (user && user?.email)) {
       const assetRequest = {
         assetName: assetName.toUpperCase(),
+        email: user.email,
         price: parseFloat(price),
         returnType: type,
         image: response.data.data.display_url,
@@ -104,7 +105,7 @@ const MakeCustomReq = () => {
             <input
               type="text"
               {...register("type", { required: true })}
-              placeholder=" Input Price here"
+              placeholder=" Returnable/Non-Returnable"
               className="input input-bordered"
             />
           </div>

@@ -30,6 +30,7 @@ const EmployeeRegistration = () => {
           const userInfo = {
             name: data.name,
             email: data.email,
+            date: data.date,
             role: "employee",
           };
 

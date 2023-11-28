@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
+import useAxiosPublic from "../../../Hook/useAxiosPublic";
 const AdminRegistration = () => {
   const options = [
     { value: "5 Members For $5", label: "5 Members For $5" },
@@ -15,6 +16,7 @@ const AdminRegistration = () => {
   const { createUser, updateUserProfile } = useAuth();
   const [selectedPackage, setSelectedPackage] = useState(null);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   //   console.log(selectedPackage);
 
@@ -34,17 +36,31 @@ const AdminRegistration = () => {
 
     createUser(email, password)
       .then((res) => {
-        const regUser = res.user;
+        // const regUser = res.user;
         console.log(res.data);
 
         updateUserProfile(data.name, data.companyLogo).then(() => {
           console.log("name, and photo update");
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your registration successfully completed as an Admin",
-            showConfirmButton: false,
-            timer: 1500,
+
+          const userInfo = {
+            ...data,
+            selectedPackage,
+
+            role: "admin",
+          };
+
+          console.log(userInfo);
+
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your registration successfully completed as an Admin",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
           });
         });
       })
