@@ -5,6 +5,7 @@ import moment from "moment";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  console.log(user);
   const navigate = useNavigate();
   const handleLogOut = () => {
     logOut()

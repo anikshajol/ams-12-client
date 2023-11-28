@@ -26,7 +26,7 @@ const CustomRequest = () => {
           <tbody className="text-lg uppercase ">
             {/* row 1 */}
             {requestAssets.map((asset, index) => (
-              <tr key={asset.id}>
+              <tr key={asset._id}>
                 <th>{index + 1}</th>
                 <td> {asset.assetName} </td>
                 <td>${asset.price}</td>

@@ -3,6 +3,7 @@ import useAxiosPublic from "../../../Hook/useAxiosPublic";
 import moment from "moment";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hook/useAuth";
 
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
@@ -10,6 +11,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${imageHostingKey}
 const MakeCustomReq = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const {
     register,
@@ -30,7 +32,7 @@ const MakeCustomReq = () => {
       },
     });
 
-    if (response.data.success) {
+    if (response.data.success && user && user.email) {
       const assetRequest = {
         assetName: assetName.toUpperCase(),
         price: parseFloat(price),

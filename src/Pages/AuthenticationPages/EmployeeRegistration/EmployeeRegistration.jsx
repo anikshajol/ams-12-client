@@ -1,12 +1,17 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hook/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hook/useAxiosPublic";
 
 const EmployeeRegistration = () => {
   const { createUser, loading, updateUserProfile } = useAuth();
   // console.log(loading);
+
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -21,12 +26,26 @@ const EmployeeRegistration = () => {
         console.log(res.data);
         updateUserProfile(data.name, data.companyLogo).then(() => {
           console.log("name and photo updated");
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your registration successfully completed as a Employee",
-            showConfirmButton: false,
-            timer: 1500,
+
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            role: "employee",
+          };
+
+          console.log(userInfo);
+
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your registration successfully completed as a Employee",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              // navigate("/");
+            }
           });
         });
       })
