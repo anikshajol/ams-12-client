@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
+import useAxiosPublic from "../Hook/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const provider = new GoogleAuthProvider();
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const axiosPublic = useAxiosPublic();
 
   //google login
 
@@ -46,14 +48,14 @@ const AuthProvider = ({ children }) => {
   // login
 
   const loginUser = (email, password) => {
-    setLoading(false);
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // logout
 
   const logOut = () => {
-    setLoading(false);
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -61,9 +63,19 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log("current user", currentUser);
+      const userInfo = { email: currentUser?.email };
+      if (currentUser) {
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
+          }
+        });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
+      }
     });
-
-    setLoading(false);
 
     return () => unsubscribe();
   }, []);

@@ -7,13 +7,14 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import { FcGoogle } from "react-icons/fc";
 const AdminRegistration = () => {
   const options = [
     { value: "5 Members For $5", label: "5 Members For $5" },
     { value: "10 Members for $8", label: "10 Members for $8" },
     { value: "20 Members for $15", label: "20 Members for $15" },
   ];
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, loginWithGoogle } = useAuth();
   const [selectedPackage, setSelectedPackage] = useState(null);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -39,13 +40,16 @@ const AdminRegistration = () => {
         // const regUser = res.user;
         console.log(res.data);
 
-        updateUserProfile(data.name, data.companyLogo).then(() => {
+        updateUserProfile(data.name, data.photo).then(() => {
           console.log("name, and photo update");
 
           const userInfo = {
-            ...data,
+            name: data.name,
+            email: data.email,
+            company: data.companyName,
+            photo: data.photo,
             selectedPackage,
-
+            date: data.date,
             role: "admin",
           };
 
@@ -113,12 +117,12 @@ const AdminRegistration = () => {
               {/* Company Logo */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text  text-xl">Company Logo</span>
+                  <span className="label-text  text-xl">Photo</span>
                 </label>
 
                 <input
                   type="text"
-                  {...register("companyLogo", { required: true })}
+                  {...register("photo", { required: true })}
                   placeholder="Give url of Company Logo"
                   className="input input-bordered"
                 />
@@ -202,9 +206,6 @@ const AdminRegistration = () => {
                 </button>
               </div>
             </form>
-            <div className=" flex justify-center">
-              <GoogleLogin></GoogleLogin>
-            </div>
           </div>
         </div>
       </div>

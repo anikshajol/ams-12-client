@@ -8,7 +8,7 @@ import Packages from "../Packages/Packages";
 
 const Home = () => {
   const { user } = useAuth();
-  const isAdmin = useAdmin();
+  const [isAdmin] = useAdmin();
   return (
     <div>
       {!user ? (

@@ -4,13 +4,39 @@ import useAuth from "../../../Hook/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import GoogleLogin from "../SocialLogin/GoogleLogin";
 
 const EmployeeRegistration = () => {
-  const { createUser, loading, updateUserProfile } = useAuth();
+  const { createUser, loading, updateUserProfile, loginWithGoogle } = useAuth();
   // console.log(loading);
 
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle().then((res) => {
+      const socialUserInfo = {
+        email: res.user?.email,
+        name: res.user?.displayName,
+        photo: res.user?.photoURL,
+        role: "employee",
+      };
+
+      axiosPublic.post("/users", socialUserInfo).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your registration successfully completed as an Admin",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        navigate("/");
+      });
+    });
+  };
 
   const {
     register,
@@ -31,6 +57,7 @@ const EmployeeRegistration = () => {
             name: data.name,
             email: data.email,
             date: data.date,
+            photo: data.companyLogo,
             role: "employee",
           };
 
@@ -161,6 +188,7 @@ const EmployeeRegistration = () => {
                 </p>
               </div>
             </form>
+            <GoogleLogin handleGoogleLogin={handleGoogleLogin}></GoogleLogin>
           </div>
         </div>
       </div>
