@@ -15,7 +15,7 @@ const AdminRegistration = () => {
     { value: "20 Members for $15", label: "20 Members for $15" },
   ];
   const { createUser, updateUserProfile, loginWithGoogle } = useAuth();
-  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [selectedPackage, setSelectedPackage] = useState(" ");
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
 
@@ -191,9 +191,9 @@ const AdminRegistration = () => {
                   <span className="label-text text-xl  ">Select Packages</span>
                 </label>
                 <Select
-                  //   {...register("selectedPackage", { required: true })}
+                  // {...register("selectedPackage", { required: true })}
                   onChange={(selectedOptions) => {
-                    const selectPackage = selectedOptions?.value || "N/A";
+                    const selectPackage = selectedOptions?.value || "";
                     setSelectedPackage(selectPackage);
                   }}
                   options={options}

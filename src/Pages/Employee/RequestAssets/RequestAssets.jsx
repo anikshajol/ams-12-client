@@ -31,7 +31,7 @@ const RequestAssets = () => {
   return (
     <div>
       <Helmet>
-        <title>Admin Registration</title>
+        <title>All Assets</title>
       </Helmet>
       <div className="py-8 flex gap-3 justify-center">
         <div className="flex">
@@ -79,7 +79,7 @@ const RequestAssets = () => {
                 <tr key={index}>
                   <th>{index + 1}</th>
                   <td>{asset.assetName}</td>
-                  <td>{asset.returnType}</td>
+                  <td>{asset.returnType || asset.type}</td>
                   <td
                     className="font-bold"
                     style={{

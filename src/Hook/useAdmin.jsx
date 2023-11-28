@@ -1,12 +1,13 @@
-import React from "react";
 import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
 
+// import useAxiosPublic from "./useAxiosPublic";
+
 const useAdmin = () => {
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useAuth();
-  const { data: isAdmin } = useQuery({
+  const { data: isAdmin, isPending } = useQuery({
     queryKey: [user?.email, "isAdmin"],
     enabled: !loading,
     queryFn: async () => {
@@ -14,7 +15,7 @@ const useAdmin = () => {
       return res.data?.admin;
     },
   });
-  return [isAdmin];
+  return [isAdmin, isPending];
 };
 
 export default useAdmin;

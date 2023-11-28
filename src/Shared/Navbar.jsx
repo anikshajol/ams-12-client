@@ -6,7 +6,8 @@ import useAdmin from "../Hook/useAdmin";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   // const axiosPublic = useAxiosPublic();
-  const [isAdmin] = useAdmin();
+  const [isAdmin, isPending] = useAdmin();
+  console.log(isAdmin);
 
   // const employee = data.filter((user) => user.role === "employee");
 
