@@ -2,19 +2,42 @@ import { Helmet } from "react-helmet-async";
 import useAssets from "../../../Hook/useAssets";
 import useAuth from "../../../Hook/useAuth";
 import { useEffect, useState } from "react";
+import moment from "moment";
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 const RequestAssets = () => {
   const [search, setSearch] = useState("");
   const [assets, isPending, refetch] = useAssets(search);
-  const { loading } = useAuth();
   console.log(assets);
+  const { loading } = useAuth();
+  // console.log(assets);
   const [selectType, setSelectType] = useState(null);
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  console.log(user);
 
   const handleFilterChange = (e) => {
     setSelectType(e.target.value);
   };
 
   // Todo: need modal for request button
+
+  const handleSubmitRequest = async (id, additionalInformation, e) => {
+    try {
+      e.preventDefault();
+      const requestInfo = {
+        additionalInformation,
+        requestDate: moment().format("DD/MM/YYYY, h:mm A"),
+        emailOfRequester: user?.email,
+        nameOfRequester: user?.displayName,
+      };
+
+      console.log(requestInfo);
+      const res = await axiosSecure.put(`/assets/${id}`, requestInfo);
+
+      console.log(res.data);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     refetch();
@@ -31,7 +54,7 @@ const RequestAssets = () => {
   return (
     <div>
       <Helmet>
-        <title>All Assets</title>
+        <title>All Assets Request</title>
       </Helmet>
       <div className="py-8 flex gap-3 justify-center">
         <div className="flex">
@@ -90,7 +113,59 @@ const RequestAssets = () => {
                   </td>
                   <td>
                     {asset.availability ? (
-                      <button className="btn btn-primary">Request</button>
+                      <>
+                        <button
+                          className="btn btn-primary"
+                          onClick={() =>
+                            document
+                              .getElementById(`my_modal_${asset._id}`)
+                              .showModal()
+                          }
+                        >
+                          Request
+                        </button>
+                        <dialog id={`my_modal_${asset._id}`} className="modal ">
+                          <div className="modal-box min-w-screen">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
+                              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                ✕
+                              </button>
+                            </form>
+
+                            <form
+                              onSubmit={(e) =>
+                                handleSubmitRequest(
+                                  asset._id,
+                                  e.target.info.value,
+                                  e
+                                )
+                              }
+                            >
+                              <div className="form-control py-3">
+                                <label className="label">
+                                  <span className="label-text">
+                                    Additional Information
+                                  </span>
+                                </label>
+                                <textarea
+                                  name="info"
+                                  className="textarea textarea-warning px-10"
+                                  placeholder="Additional Information"
+                                ></textarea>
+                              </div>
+
+                              <div className="my-3 flex justify-center">
+                                <input
+                                  type="submit"
+                                  value={"Request"}
+                                  className="btn btn-warning"
+                                />
+                              </div>
+                            </form>
+                          </div>
+                        </dialog>
+                      </>
                     ) : (
                       <button disabled className="btn btn-primary">
                         Request

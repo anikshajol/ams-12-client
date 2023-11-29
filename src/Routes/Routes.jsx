@@ -14,8 +14,8 @@ import AllRequest from "../Pages/Admin/AllRequest/AllRequest";
 import MyEmployeeList from "../Pages/Admin/MyEmployeeList/MyEmployeeList";
 import AddAnEmployee from "../Pages/Admin/AddAnEmployee/AddAnEmployee";
 import AdminProfile from "../Pages/Admin/AdminProfile/AdminProfile";
-import CustomRequest from "../Pages/Admin/CustomRequest/CustomRequest";
 import AssetList from "../Pages/Admin/AssetList/AssetList";
+import CustomRequestList from "../Pages/Admin/CustomRequest/CustomRequestList";
 // import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "customRequest",
-        element: <CustomRequest></CustomRequest>,
+        element: <CustomRequestList></CustomRequestList>,
       },
       {
         path: "myEmployee",

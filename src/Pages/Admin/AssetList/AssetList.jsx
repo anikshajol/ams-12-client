@@ -10,6 +10,8 @@ const AssetList = () => {
   const [assets, isPending, refetch] = useAssets(search);
   // console.log(empAssets);
 
+  // todo need delete and update button
+
   const handleClickToReturn = () => {
     setIsClicked(true);
   };
