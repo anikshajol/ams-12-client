@@ -64,6 +64,7 @@ const AdminRegistration = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
+              navigate("/payment");
             }
           });
         });
