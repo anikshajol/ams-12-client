@@ -17,6 +17,7 @@ import AdminProfile from "../Pages/Admin/AdminProfile/AdminProfile";
 import AssetList from "../Pages/Admin/AssetList/AssetList";
 import CustomRequestList from "../Pages/Admin/CustomRequest/CustomRequestList";
 import Payment from "../Pages/Admin/Payment/Payment";
+import MyTeam from "../Pages/Employee/MyTeam/MyTeam";
 // import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "/my-assets",
         element: <MyAssets></MyAssets>,
+      },
+      {
+        path: "/my-team",
+        element: <MyTeam></MyTeam>,
       },
       {
         path: "/request-for-asset",
